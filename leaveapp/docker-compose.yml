@@ -1,0 +1,54 @@
+version: "3.8"
+
+services:
+  web:
+    build: .
+    command: ["gunicorn", "--bind", ":8000", "leaveapp.wsgi:application"]
+    volumes:
+      - .:/app
+      - media_volume:/app/media/
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - redis
+    env_file:
+      - .env
+    networks:
+      - leave_app_network
+
+  db:
+    image: postgres:13
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    networks:
+      - leaveapp-network
+
+  
+
+  daphne:
+    build: .
+    command: ["daphne", "-b", "0.0.0.0", "-p", "8001", "leaveapp.asgi:application"]
+    volumes:
+      - .:/app
+    ports:
+      - "8001:8001"
+    depends_on:
+      - db
+      - redis
+    env_file:
+      - .env
+    networks:
+      - leaveapp-network
+
+volumes:
+  db_data:
+  media_volume:
+
+networks:
+  leaveapp-network:
+    driver: bridge
