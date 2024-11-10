@@ -103,6 +103,9 @@ CORS_ALLOW_METHODS = ["DELETE", "GET", "OPTIONS", "PATCH", "POST", "PUT", "HEAD"
 
 AUTH_USER_MODEL = "employe.CustomUser"
 
+ASGI_APPLICATION = 'leaveapp.asgi.application'
+
+
 
 ROOT_URLCONF = 'leaveapp.urls'
 
