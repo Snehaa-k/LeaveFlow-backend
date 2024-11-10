@@ -15,4 +15,4 @@ def isolated_modules():
         import_helper.modules_cleanup(saved)
 
 
-vars(import_helper).setdefault('isolated_modules', isolated_modules)
+vars(import_helper).setdefault("isolated_modules", isolated_modules)

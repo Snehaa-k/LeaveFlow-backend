@@ -8,21 +8,38 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('employe', '0002_customuser_otp'),
+        ("employe", "0002_customuser_otp"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Leaveapplication',
+            name="Leaveapplication",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('leave_type', models.CharField(max_length=255)),
-                ('start_date', models.DateField()),
-                ('end_date', models.DateField()),
-                ('reason', models.TextField(max_length=334)),
-                ('document', models.ImageField(blank=True, null=True, upload_to='media')),
-                ('status', models.CharField(default='pending', max_length=200)),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("leave_type", models.CharField(max_length=255)),
+                ("start_date", models.DateField()),
+                ("end_date", models.DateField()),
+                ("reason", models.TextField(max_length=334)),
+                (
+                    "document",
+                    models.ImageField(blank=True, null=True, upload_to="media"),
+                ),
+                ("status", models.CharField(default="pending", max_length=200)),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]

@@ -8,13 +8,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('employe', '0003_leaveapplication'),
+        ("employe", "0003_leaveapplication"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='leaveapplication',
-            name='user',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='leave_applications', to=settings.AUTH_USER_MODEL),
+            model_name="leaveapplication",
+            name="user",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="leave_applications",
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
     ]
