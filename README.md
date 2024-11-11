@@ -38,4 +38,4 @@ This is a full-stack Leave Application and Approval System built using React, Dj
 
    ```bash
    git clone https://github.com/Snehaa-k/LeaveFlow-backend 
-   cd leave-application-system
+   cd leaveapp
