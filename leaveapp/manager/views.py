@@ -11,6 +11,7 @@ from employe.serializers import LeaveApplicationSerializer, UserLeaveSerializer
 from rest_framework.parsers import MultiPartParser
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from .permissions import IsAdminUser
 
 
 
@@ -23,8 +24,7 @@ class LeaveApplicationList(APIView):
 
 
 class AcceptLeaveRequest(APIView):
-
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAdminUser]
     def post(self, request, id, *args, **kwargs):
 
         try:
@@ -32,7 +32,7 @@ class AcceptLeaveRequest(APIView):
             user = CustomUser.objects.get(email=form.user.email)
         except CustomUser.DoesNotExist:
             return Response(
-                {"error": "Travel Leader Form not found"},
+                {"error": "email is not found"},
                 status=status.HTTP_404_NOT_FOUND,
             )
 
@@ -44,7 +44,7 @@ class AcceptLeaveRequest(APIView):
 
 class RejectLeaveRequest(APIView):
 
-    permission_classes = [IsAuthenticated] 
+    permission_classes = [IsAdminUser] 
     def post(self, request, id, *args, **kwargs):
 
         try:
@@ -52,7 +52,7 @@ class RejectLeaveRequest(APIView):
             user = CustomUser.objects.get(email=form.user.email)
         except CustomUser.DoesNotExist:
             return Response(
-                {"error": "Travel Leader Form not found"},
+                {"error": "email is not found"},
                 status=status.HTTP_404_NOT_FOUND,
             )
 

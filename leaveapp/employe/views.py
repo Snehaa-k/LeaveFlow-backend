@@ -8,7 +8,6 @@ from rest_framework.views import APIView
 from rest_framework import generics
 from django.core.mail import send_mail
 from .serializers import (
-    UserLeaveSerializer,
     UserSerializer,
     LeaveApplicationSerializer,
     ProfileSerializer,
@@ -78,7 +77,7 @@ class CustomTokenObtainPairView(APIView):
 
         if not check_password(password, user.password):
             return Response(
-                {"error": "Invalid credentials"}, status=status.HTTP_401_UNAUTHORIZED
+                {"error": "password are not correct "}, status=status.HTTP_401_UNAUTHORIZED
             )
 
         if user.is_superuser == False:
@@ -171,7 +170,7 @@ class EditLeave(APIView):
             leave, created = Leaveapplication.objects.get_or_create(id=id)
         except Leaveapplication.DoesNotExist:
             return Response(
-                {"error": "trip not found"}, status=status.HTTP_404_NOT_FOUND
+                {"error": "application is not exists"}, status=status.HTTP_404_NOT_FOUND
             )
 
         leave_type = request.data.get("leave_type")
